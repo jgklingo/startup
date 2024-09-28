@@ -17,5 +17,5 @@
 - The value attribute allows you to set the default value
 - `<hr>` draws a line across the screen
 - `<textarea>` creates a paragraph input field
-    - has a `rows` and `cols` attribute to set default size, but can be resized
+    - Has a `rows` and `cols` attribute to set default size, but can be resized
 - `<a href="">text</a>` can be used to create a link that doesn't go anywhere
