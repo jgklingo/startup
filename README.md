@@ -24,3 +24,8 @@ Professors open the app on their computers and create a class, and students are 
  - **Authentication** - The user must log in before posting a question.
  - **Database** - Accounts and credentials are stored in a persistent database. Questions and their related data are stored as well.
  - **Websocket** - Votes are broadcast between users in real time.
+
+ ## HTML Notes
+
+ See HTML section in [notes.md](notes/notes.md)
+ 
