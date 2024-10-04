@@ -20,12 +20,12 @@ Professors open the app on their computers and create a class, and students are 
  - **CSS** - Simple yet interesting colors and shapes will be used throughout the UI. A simple animation will show when a question is submitted.
  - **JavaScript** - Used for login, submitting and showing questions, voting, and calling endpoints.
  - **React** - The main app UI will be contained in a React page that changes based on user input (user questions and votes) and data received from the server (other users' questions and votes).
- - **Web Service** - Backend service with functions to log in and post a question. Will also call an external API to get anonymous names for users on login.
+ - **Web Service** - Backend service with functions to log in and post a question. Will also call an external API to get anonymous names for users on login (https://metmuseum.github.io/).
  - **Authentication** - The user must log in before posting a question.
  - **Database** - Accounts and credentials are stored in a persistent database. Questions and their related data are stored as well.
  - **Websocket** - Votes are broadcast between users in real time.
 
- ## HTML Notes
+ ## CSS Notes
 
- See HTML section in [notes.md](notes/notes.md)
+ See CSS section in [notes.md](notes/notes.md)
  
