@@ -2,6 +2,14 @@
     flex: 0 80px;
   }
 
+  header .session-info {
+    float: right;
+    padding-right: 0.3em;
+    p {
+        margin-bottom: 0;
+    }
+  }
+
   img.logo {
     height: 1em;
   }
@@ -41,15 +49,4 @@
     float: right;
   }
 
-  @media (max-height: 600px) {
-    header {
-      display: none;
-    }
-    footer {
-      display: none;
-    }
-    main {
-      flex: 1 100vh;
-    }
-  }
   
