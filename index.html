@@ -28,23 +28,25 @@
     </header>
     
     <main class="container-fluid bg-light text-center">
-        <h2>Login to OpenQuestion</h2>
-        <form method="get" action="app.html">
-            <div>
-                <span><label for="email">Email:</label></span>
-                <input id="email" type="text" placeholder="your@email.com" />
-            </div>
-            <div>
-                <span><label for="pass">Password:</label></span>
-                <input id="pass" type="password" placeholder="password" />
-            </div>
-            <div>
-                <span><label for="code">Class Code:</label></span>
-                <input id="code" type="text" value="ABC123" />
-            </div>
-            <button type="submit">Login</button>
-            <button type="submit">Create Account</button>
-        </form>
+        <div>
+            <h2>Sign In</h2>
+            <form method="get" action="app.html">
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-secondary text-light"><label for="email">Email:</label></span>
+                    <input class="form-control" id="email" type="text" placeholder="your@email.com" />
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-secondary text-light"><label for="pass">Password:</label></span>
+                    <input class="form-control" id="pass" type="password" placeholder="password" />
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-secondary text-light"><label for="code">Class Code:</label></span>
+                    <input class="form-control" id="code" type="text" value="ABC123" />
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+        </div>
     </main>
 
     <footer class="bg-secondary text-light">
