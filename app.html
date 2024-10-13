@@ -16,10 +16,10 @@
     />
 </head>
 
-<body class="bg-light text-dark">
-    <header class="container-fluid bg-dark text-light">
-        <h1><img src="icon_large_white.svg" class="logo" />OpenQuestion</h1>
-        <nav class="navbar fixed-top navbar-dark">
+<body class="text-dark">
+    <header class="container-fluid">
+        <nav class="navbar fixed-top navbar-dark bg-dark text-light">
+            <h1><img src="icon_large_white.svg" class="logo" />OpenQuestion</h1>
             <menu class="navbar-nav">
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="app.html" class="nav-link active">Questions</a></li>
@@ -31,31 +31,45 @@
         </nav>
     </header>
     
-    <main class="container-fluid bg-light text-center">
-        <h2>Ask a Question</h2>
-        <form>
-            <p><label for="question">Question text:</label></p>
-            <textarea id="question" rows="4" cols="50" placeholder="Type your question here..."></textarea>
-            <p><button type="submit">Submit</button></p>
-        </form>
-        <hr />
-        <h3>Anonymous Mole Rat</h3>
-        <p>3 min ago</p>
-        <p>What is the cytoplasm made up of?</p>
-        <p>
-            4 votes
-            <a href="">Upvote</a>
-            <a href="">Downvote</a>
-        </p>
-        <hr />
-        <h3>Anonymous Giraffe</h3>
-        <p>4 sec ago</p>
-        <p>What is the mitochondria?</p>
-        <p>
-            0 votes
-            <a href="">Upvote</a>
-            <a href="">Downvote</a>
-        </p>
+    <main class="container-fluid text-center">
+        <div class="d-flex flex-column align-items-center">
+            <div class="card app-card my-2">
+                <div class="my-3">
+                    <h2>Ask a Question</h2>
+                    <form>
+                        <div class="d-flex justify-content-center">
+                            <textarea id="question" placeholder="Type your question here..." class="input-group-text mb-3"></textarea>
+                        </div>
+                        <p><button type="submit" class="btn btn-primary">Submit</button></p>
+                    </form>
+                </div>
+            </div>
+            <div class="card app-card my-2">
+                <div class="my-3 text-start ps-3">
+                    <h4>Anonymous Mole Rat</h4>
+                    <p class="fst-italic">3 min ago</p>
+                    <p>What is the cytoplasm made up of?</p>
+                    <p>
+                        4 votes
+                        <a href="">Upvote</a>
+                        <a href="">Downvote</a>
+                    </p>
+                </div>
+            </div>
+            <div class="card app-card my-2">
+                <div class="my-3 text-start ps-3">
+                    <h4>Anonymous Giraffe</h4>
+                    <p class="fst-italic">4 sec ago</p>
+                    <p class="">What is the mitochondria?</p>
+                    <p>
+                        0 votes
+                        <a href="">Upvote</a>
+                        <a href="">Downvote</a>
+                    </p>
+                </div>
+            </div>
+            
+        </div>
     </main>
 
     <footer class="bg-secondary text-light">
