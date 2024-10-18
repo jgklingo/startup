@@ -32,7 +32,3 @@
 - For sized attributes, there are a plethora of units you can use to proportionally scale your page
 - @font-face allows the import of fonts
 - Have a main.css for general styling and other .css files for individual pages and elements that require a lot of styling
-- Added bootstrap cards to show borders around the questions
-- Added bootstrap navbar that will persistently stay on the screen when you scroll
-- Added sign in form that is centered to the page vertically and horizontally
-- Added session info on the app page that is aligned to the right

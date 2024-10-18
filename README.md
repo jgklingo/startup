@@ -25,7 +25,10 @@ Professors open the app on their computers and create a class, and students are 
  - **Database** - Accounts and credentials are stored in a persistent database. Questions and their related data are stored as well.
  - **Websocket** - Votes are broadcast between users in real time.
 
- ## CSS Notes
+ ## CSS Changelog
 
- See CSS section in [notes.md](notes/notes.md)
+- Added bootstrap cards to show borders around the questions
+- Added bootstrap navbar that will persistently stay on the screen when you scroll
+- Added sign in form that is centered to the page vertically and horizontally
+- Added session info on the app page that is aligned to the right
  
