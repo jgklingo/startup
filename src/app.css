@@ -27,7 +27,7 @@
     padding-top: 1em;
   }
 
-  body {
+  .body {
     display: flex;
     flex-direction: column;
     min-width: 375px;

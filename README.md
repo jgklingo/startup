@@ -12,7 +12,7 @@ Professors open the app on their computers and create a class, and students are 
 
 ## Mockup
 
-![OpenQuestion mock UI](OpenQuestionUI.png)
+![OpenQuestion mock UI](notes/OpenQuestionUI.png)
 
 ## Technologies
 
