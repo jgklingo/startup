@@ -7,7 +7,7 @@ export default function App() {
         <div className="text-dark">
             <header className="container-fluid">
                 <nav className="navbar fixed-top navbar-dark bg-dark text-light">
-                    <h1><img src="public/icon_large_white.svg" className="logo" />OpenQuestion</h1>
+                    <h1><img src="icon_large_white.svg" className="logo" />OpenQuestion</h1>
                     <menu className="navbar-nav">
                         <li className="nav-item"><a href="index.html" className="nav-link">Home</a></li>
                         <li className="nav-item"><a href="app.html" className="nav-link active">Questions</a></li>
