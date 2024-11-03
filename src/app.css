@@ -55,19 +55,16 @@ footer a {
   float: right;
 }
 
+/* to be moved */
 .app-card {
   width: 38rem;
 }
 
+/* to be moved */
 textarea {
   resize: none !important;
   text-align: center;
   width: 80%;
-}
-
-.sign-in {
-  align-items: center;
-  justify-content: space-around;
 }
 
 .content {
