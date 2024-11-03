@@ -5,6 +5,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Questions } from './questions/questions';
 
+// TODO: must scroll to see footer
 export default function App() {
   return (
     <BrowserRouter>

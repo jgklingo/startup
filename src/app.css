@@ -55,18 +55,6 @@ footer a {
   float: right;
 }
 
-/* to be moved */
-.app-card {
-  width: 38rem;
-}
-
-/* to be moved */
-textarea {
-  resize: none !important;
-  text-align: center;
-  width: 80%;
-}
-
 .content {
   padding-top: 31px;
 }

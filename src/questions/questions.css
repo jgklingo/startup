@@ -1,0 +1,9 @@
+  .app-card {
+    width: 38rem;
+  }
+  
+  textarea {
+    resize: none !important;
+    text-align: center;
+    width: 80%;
+  }
