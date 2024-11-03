@@ -4,7 +4,7 @@ import '../app.css';
 
 export default function App() {
   return (
-        <div className="text-dark">
+        <div className="body text-dark">
             <header className="container-fluid">
                 <nav className="navbar fixed-top navbar-dark bg-dark text-light">
                     <h1><img src="icon_large_white.svg" className="logo" />OpenQuestion</h1>
