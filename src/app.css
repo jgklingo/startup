@@ -1,66 +1,75 @@
-  header {
-    flex: 0 80px;
-  }
+.second-row {
+  margin-top: -1.5rem;
+}
 
-  header .session-info {
-    float: right;
-    padding-right: 0.3em;
-    p {
-        margin-bottom: 0;
-    }
-  }
+header {
+  overflow: hidden !important;
+  flex: 0 80px;
+}
 
-  img.logo {
-    height: 1em;
-  }
+header .session-info {
+  float: right;
+  padding-right: .8em;
 
-  menu {
-    flex: 1;
-    display: flex;
-    /*  overwrite Bootstrap so the menu does not wrap */
-    flex-direction: row !important;
-    list-style: none;
+  p {
+    margin-bottom: 0;
   }
+}
 
-  menu .nav-item {
-    padding: 0 0.3em;
-    padding-top: 1em;
-  }
+img.logo {
+  height: 1em;
+}
 
-  .body {
-    display: flex;
-    flex-direction: column;
-    min-width: 375px;
-  }
+menu {
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
+}
 
-  main {
-    flex: 1 calc(100vh - 110px);
-    display: flex;
-    flex-direction: column;
-    /* align-items: center;
+menu .nav-item {
+  padding: 0 0.3em;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+}
+
+main {
+  flex: 1 calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
     justify-content: space-around; */
-    background-color: #E0E0E0;
-  }
+  background-color: #E0E0E0;
+}
 
-  footer {
-    flex: 0 30px;
-  }
+footer {
+  flex: 0 30px;
+}
 
-  footer a {
-    float: right;
-  }
+footer a {
+  float: right;
+}
 
-  .app-card {
-    width: 38rem;
-  }
+.app-card {
+  width: 38rem;
+}
 
-  textarea {
-    resize: none !important;
-    text-align: center;
-    width: 80%;
-  }
+textarea {
+  resize: none !important;
+  text-align: center;
+  width: 80%;
+}
 
-  .sign-in {
-    align-items: center;
-    justify-content: space-around;
-  }
+.sign-in {
+  align-items: center;
+  justify-content: space-around;
+}
+
+.content {
+  padding-top: 31px;
+}

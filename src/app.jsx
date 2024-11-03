@@ -11,27 +11,37 @@ export default function App() {
         <div className="body text-dark">
             <header className="container-fluid">
                 <nav className="navbar fixed-top navbar-dark bg-dark text-light">
-                    <h1><img src="icon_large_white.svg" className="logo" />OpenQuestion</h1>
-                    <menu className="navbar-nav">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to=''>Home</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to='questions'>Questions</NavLink>
-                        </li>
-                    </menu>
-                    <div className="session-info">
-                        <p>Class Code: ABC123</p>
-                        <p>User: Josh Klingonsmith</p>
+                    <div className="container-fluid py-2 d-flex align-items-center">
+                        <h1 className="d-flex align-items-center mb-0">
+                            <img src="icon_large_white.svg" className="logo me-2" alt="Logo" />
+                            OpenQuestion
+                        </h1>
+                        <div className="session-info ms-auto d-flex flex-column align-items-end">
+                            <p className="mb-0">Class Code: ABC123</p>
+                            <p className="mb-0">User: Josh Klingonsmith</p>
+                        </div>
+                    </div>
+
+                    <div className="container-fluid second-row">
+                        <menu className="navbar-nav d-flex flex-row">
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to=''>Home</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to='questions'>Questions</NavLink>
+                            </li>
+                        </menu>
                     </div>
                 </nav>
             </header>
             
-            <Routes>
-                <Route path='/' element={<Login />} exact />
-                <Route path='questions' element={<Questions />} />
-                <Route path='*' element={<NotFound />} />
-            </Routes>
+            <main className="content">
+                <Routes>
+                    <Route path='/' element={<Login />} exact />
+                    <Route path='questions' element={<Questions />} />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
+            </main>
 
             <footer className="bg-secondary text-light">
                 <div className="container-fluid">
