@@ -34,8 +34,8 @@ export function Question({ userName, text, votes, timePosted }) {
             <p>{text}</p>
             <p>
               {votes} votes
-              <a href="">Upvote</a>
-              <a href="">Downvote</a>
+              <a className="ps-2" href="">Upvote</a>
+              <a className="ps-2" href="">Downvote</a>
             </p>
           </div>
         </div>
