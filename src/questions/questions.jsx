@@ -1,8 +1,29 @@
 import React from 'react';
+import { Question } from './question';
 import './questions.css';
 
-// TODO: question cards are not responsive at all and look awful on mobile
 export function Questions() {
+  const exampleQuestions = [
+    {
+      userName: 'Test User',
+      text: 'Test question text',
+      votes: 1,
+      timePosted: new Date(1970, 0, 1, 0, 0)
+    },
+    {
+      userName: 'Anonymous Mole Rat',
+      text: 'What is the cytoplasm made up of?',
+      votes: 4,
+      timePosted: new Date(1970, 0, 1, 0, 0)
+    },
+    {
+      userName: 'Anonymous Giraffe',
+      text: 'What is the mitochondria?',
+      votes: 0,
+      timePosted: new Date(2024, 10, 8, 15, 0)
+    }
+  ]
+  const [questions, setQuestions] = React.useState(exampleQuestions);  // the example array will be replaced with a web service call
   return (
     <main className='container-fluid text-center'>
       <div className="d-flex flex-column align-items-center mt-3">
@@ -17,31 +38,10 @@ export function Questions() {
             </form>
           </div>
         </div>
-        <div className="card app-card my-2">
-          <div className="my-3 text-start ps-3">
-            <h4>Anonymous Mole Rat</h4>
-            <p className="fst-italic">3 min ago</p>
-            <p>What is the cytoplasm made up of?</p>
-            <p>
-              4 votes
-              <a href="">Upvote</a>
-              <a href="">Downvote</a>
-            </p>
-          </div>
-        </div>
-        <div className="card app-card my-2">
-          <div className="my-3 text-start ps-3">
-            <h4>Anonymous Giraffe</h4>
-            <p className="fst-italic">4 sec ago</p>
-            <p className="">What is the mitochondria?</p>
-            <p>
-              0 votes
-              <a href="">Upvote</a>
-              <a href="">Downvote</a>
-            </p>
-          </div>
-        </div>
 
+        {questions.sort((a, b) => b.votes - a.votes).map((question, index) => (
+          <Question userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} />
+        ))}
       </div>
     </main>
   );
