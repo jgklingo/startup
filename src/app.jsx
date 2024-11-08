@@ -4,9 +4,15 @@ import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Questions } from './questions/questions';
+import { AuthState } from './login/authState';
 
-// TODO: must scroll to see footer
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const [classCode, setClassCode] = React.useState(localStorage.getItem('classCode') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
+
   return (
     <BrowserRouter>
         <div className="body text-dark">
@@ -17,10 +23,12 @@ export default function App() {
                             <img src="icon_large_white.svg" className="logo me-2" alt="Logo" />
                             OpenQuestion
                         </h1>
-                        <div className="session-info ms-auto d-flex flex-column align-items-end">
-                            <p className="mb-0">Class Code: ABC123</p>
-                            <p className="mb-0">User: Josh Klingonsmith</p>
-                        </div>
+                        {authState === AuthState.Authenticated && (
+                            <div className="session-info ms-auto d-flex flex-column align-items-end">
+                                <p className="mb-0">Class Code: {classCode}</p>
+                                <p className="mb-0">User: {userName}</p>
+                            </div>
+                        )}
                     </div>
 
                     <div className="container-fluid second-row">
@@ -28,9 +36,11 @@ export default function App() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to=''>Home</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to='questions'>Questions</NavLink>
-                            </li>
+                            {authState === AuthState.Authenticated && (
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to='questions'>Questions</NavLink>
+                                </li>
+                            )}
                         </menu>
                     </div>
                 </nav>
@@ -38,7 +48,20 @@ export default function App() {
             
             <main className="content">
                 <Routes>
-                    <Route path='/' element={<Login />} exact />
+                    <Route path='/' element={
+                        <Login 
+                            userName={userName}
+                            classCode={classCode}
+                            authState={authState}
+                            onAuthChange={(userName, classCode, authState) => {
+                                setUserName(userName);
+                                setClassCode(classCode);
+                                setAuthState(authState);
+                            }}
+                        />
+                        } 
+                        exact 
+                    />
                     <Route path='questions' element={<Questions />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
