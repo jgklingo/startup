@@ -39,8 +39,8 @@ function Authenticated(props) {
       <div className="pt-3">
             <h2>Welcome, {props.userName}!</h2>
             <p>Class Code: {props.classCode}</p>
-            <Button variant='primary' onClick={() => navigate('/questions')}>Questions</Button>
-            <Button variant='secondary' onClick={logout}>Logout</Button>
+            <Button variant='primary' className='mx-1' onClick={() => navigate('/questions')}>Questions</Button>
+            <Button variant='secondary' className='mx-1' onClick={logout}>Logout</Button>
         </div>
     </main>
   );
@@ -78,10 +78,10 @@ function Unauthenticated(props) {
               <span className="input-group-text bg-secondary text-light"><label for="code">Class Code:</label></span>
               <input className="form-control" id="code" type="text" value={classCode} onChange={(e) => setClassCode(e.target.value)} placeholder="ABC123" />
           </div>
-        <Button variant='primary' onClick={() => loginUser()} disabled={!userName || !password || !classCode}>
+        <Button variant='primary' className='mx-1' onClick={() => loginUser()} disabled={!userName || !password || !classCode}>
           Login
         </Button>
-        <Button variant='primary' onClick={() => createUser()} disabled={!userName || !password || !classCode}>
+        <Button variant='primary' className='mx-1' onClick={() => createUser()} disabled={!userName || !password || !classCode}>
           Create
         </Button>
       </div>
