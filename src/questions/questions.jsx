@@ -1,37 +1,51 @@
-import React from 'react';
+import React, { act } from 'react';
+import { Button } from 'react-bootstrap';
 import { Question } from './question';
 import './questions.css';
 
-export function Questions() {
+// TODO: implement unique question ID, votes are not always updating the right question
+export function Questions({ activeUser }) {
   const exampleQuestions = [
     {
       userName: 'Test User',
       text: 'Test question text',
       votes: 1,
-      timePosted: new Date(1970, 0, 1, 0, 0)
+      timePosted: new Date(1970, 0, 1, 0, 0),
+      voters: new Set()
     },
     {
       userName: 'Anonymous Mole Rat',
       text: 'What is the cytoplasm made up of?',
       votes: 4,
-      timePosted: new Date(1970, 0, 1, 0, 0)
+      timePosted: new Date(1970, 0, 1, 0, 0),
+      voters: new Set()
     },
     {
       userName: 'Anonymous Giraffe',
       text: 'What is the mitochondria?',
       votes: 0,
-      timePosted: new Date(2024, 10, 8, 15, 0)
+      timePosted: new Date(2024, 10, 8, 15, 0),
+      voters: new Set()
     }
   ]
 
+  function updateVote(id, votes) {
+    const updatedQuestions = [...questions];   // Create a copy of the questions array
+    const tempQuestion = { ...updatedQuestions[id] };
+    tempQuestion.votes = votes
+    updatedQuestions[id] = tempQuestion;
+    setQuestions(updatedQuestions);
+  }
+
   function submitQuestion(e) {
     // this function will be replaced with a web service call
-    e.preventDefault();
+    e.preventDefault();  // don't think I need this
     setQuestions([...questions, {
-      userName: 'Test User',
+      userName: activeUser,
       text: newQuestion,
-      votes: 5,
-      timePosted: new Date()
+      votes: 4,
+      timePosted: new Date(),
+      voters: new Set()
     }]);
     setNewQuestion('');
   }
@@ -47,13 +61,13 @@ export function Questions() {
               <div className="d-flex justify-content-center">
                 <textarea id="question" placeholder="Type your question here..." value={newQuestion} onChange={(e) => setNewQuestion(e.target.value)} className="input-group-text mb-3"></textarea>
               </div>
-              <p><button type="submit" onClick={(e) => submitQuestion(e)} className="btn btn-primary">Submit</button></p>
+              <p><Button variant='primary' onClick={(e) => submitQuestion(e)} disabled={!newQuestion} className="btn btn-primary">Submit</Button></p>
             </form>
           </div>
         </div>
 
         {questions.sort((a, b) => b.votes - a.votes).map((question, index) => (
-          <Question key={index} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} />
+          <Question key={index} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={(votes) => updateVote(index, votes)} />
         ))}
       </div>
     </main>
