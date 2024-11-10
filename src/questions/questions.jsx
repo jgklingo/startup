@@ -8,17 +8,10 @@ export function Questions({ activeUser }) {
   const exampleQuestions = [
     {
       uniqueID: crypto.randomUUID(),
-      userName: 'Test User',
-      text: 'Test question text',
-      votes: 1,
-      timePosted: new Date(1970, 0, 1, 0, 1)
-    },
-    {
-      uniqueID: crypto.randomUUID(),
       userName: 'Anonymous Mole Rat',
       text: 'What is the cytoplasm made up of?',
       votes: 4,
-      timePosted: new Date(1970, 0, 1, 0, 0)
+      timePosted: new Date(2024, 10, 7, 15, 0)
     },
     {
       uniqueID: crypto.randomUUID(),
@@ -43,7 +36,7 @@ export function Questions({ activeUser }) {
       uniqueID: crypto.randomUUID(),
       userName: activeUser,
       text: newQuestion,
-      votes: 4,
+      votes: 0,
       timePosted: new Date()
     }]);
     setNewQuestion('');
