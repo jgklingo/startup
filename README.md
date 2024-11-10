@@ -25,10 +25,19 @@ Professors open the app on their computers and create a class, and students are 
  - **Database** - Accounts and credentials are stored in a persistent database. Questions and their related data are stored as well.
  - **Websocket** - Votes are broadcast between users in real time.
 
- ## CSS Changelog
+ ## React Changelog
 
-- Added bootstrap cards to show borders around the questions
-- Added bootstrap navbar that will persistently stay on the screen when you scroll
-- Added sign in form that is centered to the page vertically and horizontally
-- Added session info on the app page that is aligned to the right
- 
+- Added interactive login
+    - Questions tab and page does not appear until the user is logged in
+    - New page displays on the home tab when a user is logged out with an option to see questions and log out
+    - Login page triggers a function that will later be used to make an HTTP request for actual login
+        - Right now, only localstorage is being used to simulate a login
+    - Session info in top right is hidden by default, but displays the user's info on all pages once they log in
+ - Added interactive app interface
+    - Questions are now rendered dynamically from an array of question data objects
+        - Questions are sorted from most to least votes
+        - This will eventually be changed to pull the questions from my web service
+    - Questions can be added by entering a question into the box and clicking submit
+        - New questions get a timestamp that allows the time since post to be displayed in their cards. This information is shown in a human-readable way by calculating the number of seconds, minutes, hours, days, months, or years since post
+        - Questions have a unique UUID to allow them to be accessed later
+    - Upvotes and downvotes change the number of votes on the question and also trigger the question list to update with the new order
