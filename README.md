@@ -27,9 +27,10 @@ Professors open the app on their computers and create a class, and students are 
 
  ## React Changelog
 
+- Cleaned up CSS in many places
 - App is now bundled using Vite
 - App converted into SPA using React
-    - Browser router controls the view of one page based on navigation
+    - Router controls the view of one page based on navigation
     - Header and footer displayed on the main app page, content in between is rendered dynamically
     - React State Hooks implemented to track the app state over all pages
         - State variables contain login/user information
