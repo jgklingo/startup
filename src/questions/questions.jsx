@@ -10,30 +10,26 @@ export function Questions({ activeUser }) {
       userName: 'Test User',
       text: 'Test question text',
       votes: 1,
-      timePosted: new Date(1970, 0, 1, 0, 0),
-      voters: new Set()
+      timePosted: new Date(1970, 0, 1, 0, 1)
     },
     {
       userName: 'Anonymous Mole Rat',
       text: 'What is the cytoplasm made up of?',
       votes: 4,
-      timePosted: new Date(1970, 0, 1, 0, 0),
-      voters: new Set()
+      timePosted: new Date(1970, 0, 1, 0, 0)
     },
     {
       userName: 'Anonymous Giraffe',
       text: 'What is the mitochondria?',
       votes: 0,
-      timePosted: new Date(2024, 10, 8, 15, 0),
-      voters: new Set()
+      timePosted: new Date(2024, 10, 8, 15, 0)
     }
   ]
 
-  function updateVote(id, votes) {
+  function updateVote(timePosted, votes) {
     const updatedQuestions = [...questions];   // Create a copy of the questions array
-    const tempQuestion = { ...updatedQuestions[id] };
-    tempQuestion.votes = votes
-    updatedQuestions[id] = tempQuestion;
+    const changedQuestion = updatedQuestions.find(question => question.timePosted === timePosted);
+    changedQuestion.votes = votes
     setQuestions(updatedQuestions);
   }
 
@@ -44,8 +40,7 @@ export function Questions({ activeUser }) {
       userName: activeUser,
       text: newQuestion,
       votes: 4,
-      timePosted: new Date(),
-      voters: new Set()
+      timePosted: new Date()
     }]);
     setNewQuestion('');
   }
@@ -67,7 +62,7 @@ export function Questions({ activeUser }) {
         </div>
 
         {questions.sort((a, b) => b.votes - a.votes).map((question, index) => (
-          <Question key={index} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={(votes) => updateVote(index, votes)} />
+          <Question key={question.timePosted} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={(votes) => updateVote(question.timePosted, votes)} />
         ))}
       </div>
     </main>
