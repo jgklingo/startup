@@ -7,18 +7,21 @@ import './questions.css';
 export function Questions({ activeUser }) {
   const exampleQuestions = [
     {
+      uniqueID: crypto.randomUUID(),
       userName: 'Test User',
       text: 'Test question text',
       votes: 1,
       timePosted: new Date(1970, 0, 1, 0, 1)
     },
     {
+      uniqueID: crypto.randomUUID(),
       userName: 'Anonymous Mole Rat',
       text: 'What is the cytoplasm made up of?',
       votes: 4,
       timePosted: new Date(1970, 0, 1, 0, 0)
     },
     {
+      uniqueID: crypto.randomUUID(),
       userName: 'Anonymous Giraffe',
       text: 'What is the mitochondria?',
       votes: 0,
@@ -26,9 +29,9 @@ export function Questions({ activeUser }) {
     }
   ]
 
-  function updateVote(timePosted, votes) {
+  function updateVote(uniqueID, votes) {
     const updatedQuestions = [...questions];   // Create a copy of the questions array
-    const changedQuestion = updatedQuestions.find(question => question.timePosted === timePosted);
+    const changedQuestion = updatedQuestions.find(question => question.uniqueID === uniqueID);
     changedQuestion.votes = votes
     setQuestions(updatedQuestions);
   }
@@ -37,6 +40,7 @@ export function Questions({ activeUser }) {
     // this function will be replaced with a web service call
     e.preventDefault();  // don't think I need this
     setQuestions([...questions, {
+      uniqueID: crypto.randomUUID(),
       userName: activeUser,
       text: newQuestion,
       votes: 4,
@@ -62,7 +66,7 @@ export function Questions({ activeUser }) {
         </div>
 
         {questions.sort((a, b) => b.votes - a.votes).map((question, index) => (
-          <Question key={question.timePosted} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={(votes) => updateVote(question.timePosted, votes)} />
+          <Question key={question.uniqueID} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={(votes) => updateVote(question.uniqueID, votes)} />
         ))}
       </div>
     </main>
