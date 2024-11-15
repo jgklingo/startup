@@ -67,7 +67,7 @@ apiRouter.post('/auth', async (req, res) => {
 });
 
 // Login existing user
-apiRouter.post('/auth', async (req, res) => {
+apiRouter.put('/auth', async (req, res) => {
   const user = users[req.body.email];
   if (user) {
     if (req.body.password === user.password) {
