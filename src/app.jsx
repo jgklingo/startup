@@ -62,7 +62,7 @@ export default function App() {
                         } 
                         exact 
                     />
-                    <Route path='questions' element={<Questions activeUser={userName} />} />
+                    <Route path='questions' element={<Questions activeUser={userName} classCode={classCode} />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
             </main>

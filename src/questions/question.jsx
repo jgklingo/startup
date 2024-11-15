@@ -3,7 +3,10 @@ import { Button } from 'react-bootstrap';
 
 export function Question(props) {
     function timeSince(date) {
-        const seconds = Math.floor((new Date() - date) / 1000);
+        let seconds = 0;
+        if (Math.floor((new Date() - date) / 1000) >= 0) {
+            seconds = Math.floor((new Date() - date) / 1000);
+        }
         let interval = seconds / 31536000;
         if (interval > 1) {
             return Math.floor(interval) + (Math.floor(interval) !== 1 ? " years" : " year");

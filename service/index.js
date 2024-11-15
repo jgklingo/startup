@@ -32,15 +32,21 @@ app.endpoints = [
     requiresAuth: true,
     description: 'Get questions for a class',
     example: `curl -X GET localhost:3000/api/questions/D8VD8 -H 'Authorization: tttttt'`,
-    response: 'TBD',
+    response: '{ \
+        "uniqueID": "9ca22092-bc47-4f8a-b68e-9020c88e598a", \
+        "userName": "Anonymous Giraffe", \
+        "text": "What is the mitochondria?", \
+        "votes": 0, \
+        "timePosted": "2024-11-08T22:00:00.000Z" \
+    },',
   },
   {
     method: 'POST',
     path: '/api/questions/:classCode',
     requiresAuth: true,
     description: 'Add a question to a class',
-    example: `TBD`,
-    response: 'TBD',
+    example: `curl -X POST localhost:3000/api/questions/D8VD8 -d '{userName: "test@test.test", text: "Who are you?"}' -H 'Authorization: tttttt'`,
+    response: '{"msg": "Question added"}',
   }
 ];
 
@@ -48,7 +54,17 @@ app.use(express.static('public'));
 app.use(express.json());
 
 let users = {};
-let questions = {};
+let questions = {
+  'D8VD8': [
+    {
+      uniqueID: crypto.randomUUID(),
+      userName: 'Anonymous Giraffe',
+      text: 'What is the mitochondria?',
+      votes: 0,
+      timePosted: new Date(2024, 10, 8, 15, 0).toISOString()
+    }
+  ]
+};
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -106,9 +122,15 @@ apiRouter.post('/questions/:classCode', (req, res) => {
   if (true) {  // TODO: Change to `user` when authentication is enabled
     const classCode = req.params.classCode;
     const classQuestions = questions[classCode] || [];
-    classQuestions.push(req.body);
+    classQuestions.push({
+      uniqueID: crypto.randomUUID(),
+      userName: req.body.userName,
+      text: req.body.text,
+      votes: 0,
+      timePosted: new Date().toISOString()
+    });
     questions[classCode] = classQuestions;
-    res.status(201).end();
+    res.status(201).send({ msg: 'Question added' });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }

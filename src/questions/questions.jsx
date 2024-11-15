@@ -1,10 +1,10 @@
-import React, { act } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Question } from './question';
 import './questions.css';
 
 // TODO: implement unique question ID, votes are not always updating the right question
-export function Questions({ activeUser }) {
+export function Questions({ activeUser, classCode }) {
   const exampleQuestions = [
     {
       uniqueID: crypto.randomUUID(),
@@ -29,19 +29,48 @@ export function Questions({ activeUser }) {
     setQuestions(updatedQuestions);
   }
 
-  function submitQuestion(e) {
-    // this function will be replaced with a web service call
-    e.preventDefault();  // don't think I need this
-    setQuestions([...questions, {
-      uniqueID: crypto.randomUUID(),
+  async function submitQuestion(e) {
+    e.preventDefault(); // Prevent the default form submission behavior
+    const question = {
       userName: activeUser,
       text: newQuestion,
-      votes: 0,
-      timePosted: new Date()
-    }]);
-    setNewQuestion('');
+    };
+    const response = await fetch(`/api/questions/${classCode}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(question)
+    });
+    if (response.ok) {
+      setNewQuestion('');
+      fetchQuestions();
+    } else {
+      // Handle error
+      console.error('Failed to submit question');
+    }
   }
-  const [questions, setQuestions] = React.useState(exampleQuestions);  // the example array will be replaced with a web service call
+
+  async function fetchQuestions() {
+    const response = await fetch(`/api/questions/${classCode}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    let data = await response.json();
+    data = data.map(question => {
+      // Convert the timePosted string to a Date object
+      question.timePosted = new Date(question.timePosted);
+      return question;
+    });
+    setQuestions(data);
+  }
+  React.useEffect(() => {
+    fetchQuestions();
+  }, []);
+
+  const [questions, setQuestions] = React.useState([]);
   const [newQuestion, setNewQuestion] = React.useState('');
   return (
     <main className='container-fluid text-center'>
