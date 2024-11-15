@@ -29,9 +29,17 @@ function Authenticated(props) {
   const navigate = useNavigate();
 
   function logout() {
-    localStorage.removeItem('userName');
-    localStorage.removeItem('classCode');
-    props.onLogout();
+    fetch('/api/auth', {
+      method: 'delete',
+    })
+    .catch(() => {
+      // Logout failed, assuming offline
+    })
+    .finally(() => {
+      localStorage.removeItem('userName');
+      localStorage.removeItem('classCode');
+      props.onLogout();
+    })
   }
 
   return (
@@ -52,14 +60,28 @@ function Unauthenticated(props) {
   const [password, setPassword] = React.useState('');
   const [displayError, setDisplayError] = React.useState(null);
 
-  async function loginUser() {
-    localStorage.setItem('userName', userName);
-    localStorage.setItem('classCode', classCode);
-    props.onLogin(userName, classCode);
-  }
-
-  async function createUser() {
-    loginUser();  // to be changed once a database is implemented
+  async function loginUser(create) {
+    let method;
+    if (create) {
+      method = 'post';
+    } else {
+      method = 'put';
+    }
+    const response = await fetch('/api/auth', {
+      method: method,
+      body: JSON.stringify({ email: userName, password, classCode }),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    })
+    if (response?.status === 200) {
+      localStorage.setItem('userName', userName);
+      localStorage.setItem('classCode', classCode);
+      props.onLogin(userName, classCode);
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
+    }
   }
 
   return (
@@ -67,21 +89,21 @@ function Unauthenticated(props) {
       <div className="pt-3">
         <h2>Sign In</h2>
           <div className="input-group mb-3">
-              <span className="input-group-text bg-secondary text-light"><label for="email">Email:</label></span>
+              <span className="input-group-text bg-secondary text-light"><label htmlFor="email">Email:</label></span>
               <input className="form-control" id="email" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="your@email.com" />
           </div>
           <div className="input-group mb-3">
-              <span className="input-group-text bg-secondary text-light"><label for="pass">Password:</label></span>
+              <span className="input-group-text bg-secondary text-light"><label htmlFor="pass">Password:</label></span>
               <input className="form-control" id="pass" type="password" onChange={(e) => setPassword(e.target.value)} placeholder="password" />
           </div>
           <div className="input-group mb-3">
-              <span className="input-group-text bg-secondary text-light"><label for="code">Class Code:</label></span>
+              <span className="input-group-text bg-secondary text-light"><label htmlFor="code">Class Code:</label></span>
               <input className="form-control" id="code" type="text" value={classCode} onChange={(e) => setClassCode(e.target.value)} placeholder="ABC123" />
           </div>
-        <Button variant='primary' className='mx-1' onClick={() => loginUser()} disabled={!userName || !password || !classCode}>
+        <Button variant='primary' className='mx-1' onClick={() => loginUser(false)} disabled={!userName || !password || !classCode}>
           Login
         </Button>
-        <Button variant='primary' className='mx-1' onClick={() => createUser()} disabled={!userName || !password || !classCode}>
+        <Button variant='primary' className='mx-1' onClick={() => loginUser(true)} disabled={!userName || !password || !classCode}>
           Create
         </Button>
       </div>

@@ -8,15 +8,15 @@ app.endpoints = [
     method: 'POST',
     path: '/api/auth',
     description: 'Register a new user',
-    example: `curl -X POST localhost:3000/api/auth -d '{"name":"Test User", "email":"test@mail.com", "password":"tester"}' -H 'Content-Type: application/json'`,
-    response: 'TBD',
+    example: `curl -X POST localhost:3000/api/auth -d '{"email":"test@mail.com", "password":"tester", "classCode":"D8VD8"}' -H 'Content-Type: application/json'`,
+    response: '{"token": tttttt}',
   },
   {
     method: 'PUT',
     path: '/api/auth',
     description: 'Login existing user',
-    example: `curl -X PUT localhost:3000/api/auth -d '{"email":"test@mail.com", "password":"tester"}' -H 'Content-Type: application/json'`,
-    response: 'TBD',
+    example: `curl -X PUT localhost:3000/api/auth -d '{"email":"test@mail.com", "password":"tester", "classCode":"D8VD8"}' -H 'Content-Type: application/json'`,
+    response: '{"token": tttttt}',
   },
   {
     method: 'DELETE',
@@ -24,7 +24,7 @@ app.endpoints = [
     requiresAuth: true,
     description: 'Logout a user',
     example: `curl -X DELETE localhost:3000/api/auth -H 'Authorization: tttttt'`,
-    response: 'TBD',
+    response: '{"msg": "Logged out"}',
   },
   {
     method: 'GET',
@@ -85,13 +85,13 @@ apiRouter.delete('/auth', (req, res) => {
   if (user) {
     delete user.token;
   }
-  res.status(204).end();
+  res.status(204).send({ msg: 'Logged out' });
 });
 
 // Get questions for a class
 apiRouter.get('/questions/:classCode', (req, res) => {
   const user = Object.values(users).find((u) => u.token === req.headers.authorization);
-  if (user) {
+  if (true) {  // TODO: Change to `user` when authentication is enabled
     const classCode = req.params.classCode;
     const classQuestions = questions[classCode] || [];
     res.send(classQuestions);
@@ -103,7 +103,7 @@ apiRouter.get('/questions/:classCode', (req, res) => {
 // Add a question to a class
 apiRouter.post('/questions/:classCode', (req, res) => {
   const user = Object.values(users).find((u) => u.token === req.headers.authorization);
-  if (user) {
+  if (true) {  // TODO: Change to `user` when authentication is enabled
     const classCode = req.params.classCode;
     const classQuestions = questions[classCode] || [];
     classQuestions.push(req.body);
