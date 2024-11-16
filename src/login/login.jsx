@@ -42,11 +42,19 @@ function Authenticated(props) {
     })
   }
 
+  const [quoteData, setQuoteData] = React.useState({quote: `It's fine to celebrate success, but it is more important to heed the lessons of failure.`, author: 'Bill Gates'});
+  React.useEffect(() => {
+    fetch('https://quote.cs260.click')
+      .then(response => response.json())
+      .then(data => setQuoteData(data))
+  }, []);
+
   return (
     <main className='container-fluid text-center sign-in'>
       <div className="pt-3">
             <h2>Welcome, {props.userName}!</h2>
             <p>Class Code: {props.classCode}</p>
+            <p className="fst-italic">{quoteData.quote} - {quoteData.author}</p>
             <Button variant='primary' className='mx-1' onClick={() => navigate('/questions')}>Questions</Button>
             <Button variant='secondary' className='mx-1' onClick={logout}>Logout</Button>
         </div>
