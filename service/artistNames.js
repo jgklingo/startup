@@ -1,5 +1,6 @@
 class ArtistNames {
     constructor() {
+        // TODO: If a request is made too quickly after the service starts, it fails because of this fetch
         this.host = 'https://collectionapi.metmuseum.org';
         fetch(`${this.host}/public/collection/v1/objects`)
             .then(response => response.json())
