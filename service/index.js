@@ -1,5 +1,6 @@
 const express = require('express');
 const uuid = require('uuid');
+const artistNames = require('./artistNames');
 
 const app = express();
 
@@ -54,17 +55,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 let users = {};
-let questions = {
-  'D8VD8': [
-    {
-      uniqueID: crypto.randomUUID(),
-      userName: 'Anonymous Giraffe',
-      text: 'What is the mitochondria?',
-      votes: 0,
-      timePosted: new Date(2024, 10, 8, 15, 0).toISOString()
-    }
-  ]
-};
+let questions = {};
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -117,14 +108,15 @@ apiRouter.get('/questions/:classCode', (req, res) => {
 });
 
 // Add a question to a class
-apiRouter.post('/questions/:classCode', (req, res) => {
+apiRouter.post('/questions/:classCode', async (req, res) => {
   const user = Object.values(users).find((u) => u.token === req.headers.authorization);
   if (true) {  // TODO: Change to `user` when authentication is enabled
     const classCode = req.params.classCode;
     const classQuestions = questions[classCode] || [];
+    const artistName = await artistNames.getName(req.body.userName);
     classQuestions.push({
       uniqueID: crypto.randomUUID(),
-      userName: req.body.userName,
+      userName: artistName,
       text: req.body.text,
       votes: 0,
       timePosted: new Date().toISOString()
