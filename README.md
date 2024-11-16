@@ -25,7 +25,25 @@ Professors open the app on their computers and create a class, and students are 
  - **Database** - Accounts and credentials are stored in a persistent database. Questions and their related data are stored as well.
  - **Websocket** - Votes are broadcast between users in real time.
 
- ## React Changelog
+## Service Changelog
+
+- Created a backend HTTP service and endpoint documentation for endpoints with the following functions (see service/index.js for syntax):
+    - Register a new user
+    - Login existing user
+    - Logout a user
+    - Get questions for a class
+    - Add question to a class
+- Converted the frontend to be served through Express
+- Updated the frontend to access the service for data instead of storing the data locally. Data is synchronized between users and persisted (as long as the service stays running)
+    - Note that users will (by design) only see the questions in the class that they logged into. If they want to switch classes, they should log out and log in with a different class code
+- Added functionality to call the Met Museum API to generate random artist pseudonyms for users, anonymizing their questions
+- Also, added functionality to call the cs260 quotes API to put a computer science quote on the front page of the application when logged in
+- Fixed React routing so server error shouldn't ever appear
+- Added boilerplate database code for future deliverable
+- Added vite.config for testing
+- Updated deploy script
+
+## React Changelog
 
 - Cleaned up CSS in many places
 - App is now bundled using Vite
