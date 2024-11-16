@@ -1,5 +1,6 @@
 const express = require('express');
 const uuid = require('uuid');
+const crypto = require('crypto');
 const artistNames = require('./artistNames');
 
 const app = express();

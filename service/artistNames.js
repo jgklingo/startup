@@ -29,7 +29,7 @@ class ArtistNames {
                 let response = await fetch(`${this.host}/public/collection/v1/objects/${this.objectIDs[i]}`);
                 let data = await response.json();
                 artistName = data.artistDisplayName;
-            } while (!artistName || artistName.startsWith('Anonymous') || this.artists.has(artistName));
+            } while (!artistName || artistName.startsWith('Anonymous') || artistName.startsWith('Unknown') || this.artists.has(artistName));
             this.artists.add(artistName);
             this.users[userName] = { artistName };
             return artistName;
