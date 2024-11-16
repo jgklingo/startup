@@ -113,6 +113,9 @@ apiRouter.post('/questions/:classCode', async (req, res) => {
   if (true) {  // TODO: Change to `user` when authentication is enabled
     const classCode = req.params.classCode;
     const classQuestions = questions[classCode] || [];
+    if (!artistNames.initialized) {
+      await artistNames.init();
+    }
     const artistName = await artistNames.getName(req.body.userName);
     classQuestions.push({
       uniqueID: crypto.randomUUID(),

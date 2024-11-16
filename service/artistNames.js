@@ -1,16 +1,24 @@
 class ArtistNames {
     constructor() {
-        // TODO: If a request is made too quickly after the service starts, it fails because of this fetch
         this.host = 'https://collectionapi.metmuseum.org';
-        fetch(`${this.host}/public/collection/v1/objects`)
-            .then(response => response.json())
-            .then(data => {
-                this.objectIDs = data.objectIDs;
-            });
+        this.objectIDs = null;
         this.users = {};
         this.artists = new Set();
+        this.initialized = false;
     }
+
+    async init() {
+        const response = await fetch(`${this.host}/public/collection/v1/objects`);
+        const data = await response.json();
+        this.objectIDs = data.objectIDs;
+        this.initialized = true;
+    }
+
     async getName(userName) {
+        if (!this.objectIDs) {
+            throw new Error('ArtistNames not initialized. Call init() first.');
+        }
+
         const user = this.users[userName];
         if (user) {
             return user.artistName;
