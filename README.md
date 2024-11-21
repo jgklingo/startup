@@ -25,6 +25,23 @@ Professors open the app on their computers and create a class, and students are 
  - **Database** - Accounts and credentials are stored in a persistent database. Questions and their related data are stored as well.
  - **Websocket** - Votes are broadcast between users in real time.
 
+## Login Changelog
+
+- Implemented code to establish a connection to the Mongo database using the mongodb library.
+    - Uploaded credentials and added a check to ensure that the database connects successfully on service start.
+- Created methods for adding, updating, and deleting application data within the database in database.js.
+- Configured MongoDB to persist application data in an orderly fashion.
+- Enabled new users to create accounts in the database by submitting an email and password.
+- Encrypted and stored user credentials securely in the database using bcrypt hashing.
+- Added functionality to allow existing users to securely log in by providing their credentials and comparing hashes.
+    - Login creates a cookie that authenticates the user in future interactions with the site.
+- Provided the ability for users to log out of their accounts.
+    - Logout deletes the cookie.
+- Restricted access to specific parts of the application based on user authorization.
+    - Implemented a secure router that checks for authorization before passing requests along to secure endpoints
+- Persisted all application data in the database
+    - Questions are their own collection and are divided into documents by class code. Each class has an array of question objects that is sent to the frontend upon request.
+
 ## Service Changelog
 
 - Created a backend HTTP service and endpoint documentation for endpoints with the following functions (see service/index.js for syntax):
