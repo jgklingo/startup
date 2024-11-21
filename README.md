@@ -38,7 +38,8 @@ Professors open the app on their computers and create a class, and students are 
 - Provided the ability for users to log out of their accounts.
     - Logout deletes the cookie.
 - Restricted access to specific parts of the application based on user authorization.
-    - Implemented a secure router that checks for authorization before passing requests along to secure endpoints
+    - Implemented a secure router that checks for authorization before passing requests along to secure endpoints.
+    - For example, calls to the API to list or add questions will be denied unless associated with the correct cookie.
 - Persisted all application data in the database
     - Questions are their own collection and are divided into documents by class code. Each class has an array of question objects that is sent to the frontend upon request.
 
