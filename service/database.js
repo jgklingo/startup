@@ -46,9 +46,9 @@ async function getQuestions(classCode) {
 
 async function setClassQuestions(classCode, questions) {
   // looks like there's an error here
-  await questionsCollection.replaceOne(
-    { classCode: classCode }, 
-    questions, 
+  await questionsCollection.updateOne(
+    { classCode: classCode },
+    { $set: { questions: questions } },
     { upsert: true }
   );
 }

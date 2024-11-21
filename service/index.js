@@ -113,14 +113,16 @@ secureApiRouter.use(async (req, res, next) => {
 // Get questions for a class
 secureApiRouter.get('/questions/:classCode', async (req, res) => {
   const classCode = req.params.classCode;
-  const classQuestions = await DB.getQuestions(classCode) || [];
+  const document = await DB.getQuestions(classCode);
+  const classQuestions = document.questions || [];
   res.send(classQuestions);
 });
 
 // Add a question to a class
 secureApiRouter.post('/questions/:classCode', async (req, res) => {
   const classCode = req.params.classCode;
-  const classQuestions = await DB.getQuestions(classCode) || [];
+  const document = await DB.getQuestions(classCode);
+  const classQuestions = document.questions || [];
   if (!artistNames.initialized) {
     await artistNames.init();
   }
