@@ -42,7 +42,7 @@ function Authenticated(props) {
     })
   }
 
-  const [quoteData, setQuoteData] = React.useState({quote: `It's fine to celebrate success, but it is more important to heed the lessons of failure.`, author: 'Bill Gates'});
+  const [quoteData, setQuoteData] = React.useState({quote: '', author: ''});
   React.useEffect(() => {
     fetch('https://quote.cs260.click')
       .then(response => response.json())
