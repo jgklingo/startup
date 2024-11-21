@@ -40,8 +40,23 @@ async function createUser(email, password) {
   return user;
 }
 
+async function getQuestions(classCode) {
+  return questionsCollection.findOne({ classCode: classCode });
+}
+
+async function setClassQuestions(classCode, questions) {
+  // looks like there's an error here
+  await questionsCollection.replaceOne(
+    { classCode: classCode }, 
+    questions, 
+    { upsert: true }
+  );
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
+  getQuestions,
+  setClassQuestions,
 };

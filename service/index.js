@@ -61,8 +61,6 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.set('trust proxy', true)
 
-let questions = {};
-
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
@@ -113,16 +111,16 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 // Get questions for a class
-secureApiRouter.get('/questions/:classCode', (req, res) => {
+secureApiRouter.get('/questions/:classCode', async (req, res) => {
   const classCode = req.params.classCode;
-  const classQuestions = questions[classCode] || [];
+  const classQuestions = await DB.getQuestions(classCode) || [];
   res.send(classQuestions);
 });
 
 // Add a question to a class
 secureApiRouter.post('/questions/:classCode', async (req, res) => {
   const classCode = req.params.classCode;
-  const classQuestions = questions[classCode] || [];
+  const classQuestions = await DB.getQuestions(classCode) || [];
   if (!artistNames.initialized) {
     await artistNames.init();
   }
@@ -134,7 +132,7 @@ secureApiRouter.post('/questions/:classCode', async (req, res) => {
     votes: 0,
     timePosted: new Date().toISOString()
   });
-  questions[classCode] = classQuestions;
+  await DB.setClassQuestions(classCode, classQuestions);
   res.status(201).send({ msg: 'Question added' });
 });
 
