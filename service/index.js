@@ -115,7 +115,7 @@ secureApiRouter.use(async (req, res, next) => {
 secureApiRouter.get('/questions/:classCode', async (req, res) => {
   const classCode = req.params.classCode;
   const document = await DB.getQuestions(classCode);
-  const classQuestions = document.questions || [];
+  const classQuestions = document?.questions ?? [];
   res.send(classQuestions);
 });
 
@@ -123,7 +123,7 @@ secureApiRouter.get('/questions/:classCode', async (req, res) => {
 secureApiRouter.post('/questions/:classCode', async (req, res) => {
   const classCode = req.params.classCode;
   const document = await DB.getQuestions(classCode);
-  const classQuestions = document.questions || [];
+  const classQuestions = document?.questions ?? [];
   const artistName = await artistNames.getName(req.body.userName);
   classQuestions.push({
     uniqueID: crypto.randomUUID(),
