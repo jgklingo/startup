@@ -9,7 +9,6 @@ const db = client.db('openquestion');
 const questionsCollection = db.collection('questions');
 const userCollection = db.collection('user');
 
-
 (async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
@@ -26,7 +25,7 @@ function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
-async function createUser(email, password) {
+async function createUser(email, password, artistName) {
   // Hash the password before we insert it into the database
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -34,6 +33,7 @@ async function createUser(email, password) {
     email: email,
     password: passwordHash,
     token: uuid.v4(),
+    artistName: artistName
   };
   await userCollection.insertOne(user);
 
@@ -53,10 +53,16 @@ async function setClassQuestions(classCode, questions) {
   );
 }
 
+async function getAllArtistNames() {
+  const artistNames = await userCollection.distinct('artistName');
+  return artistNames;
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
   getQuestions,
   setClassQuestions,
+  getAllArtistNames
 };

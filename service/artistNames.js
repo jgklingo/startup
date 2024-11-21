@@ -1,9 +1,10 @@
+const DB = require('./database');
+
 class ArtistNames {
     constructor() {
         this.host = 'https://collectionapi.metmuseum.org';
         this.objectIDs = null;
-        this.users = {};
-        this.artists = new Set();
+        this.artists = null;
         this.initialized = false;
     }
 
@@ -11,15 +12,17 @@ class ArtistNames {
         const response = await fetch(`${this.host}/public/collection/v1/objects`);
         const data = await response.json();
         this.objectIDs = data.objectIDs;
+        const artistsData = await DB.getAllArtistNames()
+        this.artists = new Set(artistsData)
         this.initialized = true;
     }
 
     async getName(userName) {
-        if (!this.objectIDs) {
-            throw new Error('ArtistNames not initialized. Call init() first.');
+        if (!this.initialized) {
+            await this.init();
         }
 
-        const user = this.users[userName];
+        const user = await DB.getUser(userName);
         if (user) {
             return user.artistName;
         } else {
@@ -30,8 +33,6 @@ class ArtistNames {
                 let data = await response.json();
                 artistName = data.artistDisplayName;
             } while (!artistName || artistName.startsWith('Anonymous') || artistName.startsWith('Unknown') || this.artists.has(artistName));
-            this.artists.add(artistName);
-            this.users[userName] = { artistName };
             return artistName;
         }
     }

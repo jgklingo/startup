@@ -70,7 +70,8 @@ apiRouter.post('/auth', async (req, res) => {
   if (user) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = await DB.createUser(req.body.email, req.body.password);
+    const artistName = await artistNames.getName(req.body.userName);
+    const user = await DB.createUser(req.body.email, req.body.password, artistName);
     setAuthCookie(res, user.token);
 
     res.send({ id: user._id });
@@ -123,9 +124,6 @@ secureApiRouter.post('/questions/:classCode', async (req, res) => {
   const classCode = req.params.classCode;
   const document = await DB.getQuestions(classCode);
   const classQuestions = document.questions || [];
-  if (!artistNames.initialized) {
-    await artistNames.init();
-  }
   const artistName = await artistNames.getName(req.body.userName);
   classQuestions.push({
     uniqueID: crypto.randomUUID(),
