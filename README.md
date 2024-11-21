@@ -32,7 +32,7 @@ Professors open the app on their computers and create a class, and students are 
 - Created methods for adding, updating, and deleting application data within the database in database.js.
 - Configured MongoDB to persist application data in an orderly fashion.
 - Enabled new users to create accounts in the database by submitting an email and password.
-- Encrypted and stored user credentials securely in the database using bcrypt hashing.
+    - User credentials are encrypted and stored securely in the database using bcrypt hashing.
 - Added functionality to allow existing users to securely log in by providing their credentials and comparing hashes.
     - Login creates a cookie that authenticates the user in future interactions with the site.
 - Provided the ability for users to log out of their accounts.
