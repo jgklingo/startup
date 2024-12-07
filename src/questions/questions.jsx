@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Question } from './question';
 import './questions.css';
 
-// TODO: implement unique question ID, votes are not always updating the right question
+
 export function Questions({ activeUser, classCode }) {
   const exampleQuestions = [
     {
