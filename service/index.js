@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const artistNames = require('./artistNames');
 const DB = require('./database');
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'authToken';
 const app = express();
@@ -152,3 +153,5 @@ const port = process.argv.length > 2 ? process.argv[2] : 3000;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
