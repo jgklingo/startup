@@ -70,5 +70,6 @@ module.exports = {
   createUser,
   getQuestions,
   setClassQuestions,
+  updateVote,
   getAllArtistNames
 };
