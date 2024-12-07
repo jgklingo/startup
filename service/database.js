@@ -45,11 +45,17 @@ async function getQuestions(classCode) {
 }
 
 async function setClassQuestions(classCode, questions) {
-  // looks like there's an error here
   await questionsCollection.updateOne(
     { classCode: classCode },
     { $set: { questions: questions } },
     { upsert: true }
+  );
+}
+
+async function updateVote(classCode, uniqueID, votes) {
+  await questionsCollection.updateOne(
+    { classCode: classCode, 'questions.uniqueID': uniqueID },
+    { $set: { 'questions.$.votes': votes } }
   );
 }
 
