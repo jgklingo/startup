@@ -35,6 +35,7 @@ export function Questions({ activeUser, classCode }) {
     if (voteMessage.classCode === classCode) {
       console.log('Vote received:', voteMessage);
       fetchQuestions();
+      // updateVote(voteMessage.uniqueID, voteMessage.votes);  // not working for some reason
     }
   }
 
@@ -104,8 +105,9 @@ export function Questions({ activeUser, classCode }) {
         {questions.sort((a, b) => b.votes - a.votes).map((question, index) => (
           <Question key={question.uniqueID} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={
             (votes) => {
-              updateVote(question.uniqueID, votes)
-              voteNotifier.broadcastVote(activeUser, classCode, question.uniqueID, votes)}
+              updateVote(question.uniqueID, votes);
+              voteNotifier.broadcastVote(activeUser, classCode, question.uniqueID, votes);
+            }
           } />
         ))}
       </div>
