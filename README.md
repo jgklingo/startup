@@ -25,6 +25,18 @@ Professors open the app on their computers and create a class, and students are 
  - **Database** - Accounts and credentials are stored in a persistent database. Questions and their related data are stored as well.
  - **Websocket** - Votes are broadcast between users in real time.
 
+## WebSocket Changelog
+
+- Added function to update vote counts in the database (to allow votes to be persisted)
+- Implemented generic WebSocket proxy in backend (peerProxy.js)
+    - If the proxy receives a vote message, it updates the database accordingly then forwards the message to all connected clients
+- Added voteNotifier.js to the frontend, which connects to the backend via WebSockets 
+    - A message is sent when a vote is cast and a handler is triggered when votes are received from other clients
+- Added WebSocket functionality to interface by registering a handler that updates the vote counts when vote notifications are received
+    - Also, the interface calls the function that sends a WebSocket message any time the upvote or downvote buttons are pressed
+- Implemented a VoteMessage data class with information about votes made by users
+- Cleaned up code and tested to make sure that all components are working as intended
+
 ## Login Changelog
 
 - Implemented code to establish a connection to the Mongo database using the mongodb library.
