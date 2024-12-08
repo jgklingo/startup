@@ -24,7 +24,6 @@ export function Questions({ activeUser, classCode }) {
   ]
 
   function updateVote(uniqueID, votes) {
-    console.log('Updating vote:', uniqueID, votes);
     const updatedQuestions = [...questions];   // Create a copy of the questions array
     const changedQuestion = updatedQuestions.find(question => question.uniqueID === uniqueID);
     changedQuestion.votes = votes
@@ -33,7 +32,6 @@ export function Questions({ activeUser, classCode }) {
 
   function handleVote(voteMessage) {
     if (voteMessage.classCode === classCode) {
-      console.log('Vote received:', voteMessage);
       fetchQuestions();
       // updateVote(voteMessage.uniqueID, voteMessage.votes);  // not working for some reason
     }
