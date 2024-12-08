@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Question } from './question';
+import { voteNotifier } from './voteNotifier';
 import './questions.css';
 
 
@@ -23,11 +24,24 @@ export function Questions({ activeUser, classCode }) {
   ]
 
   function updateVote(uniqueID, votes) {
+    console.log('Updating vote:', uniqueID, votes);
     const updatedQuestions = [...questions];   // Create a copy of the questions array
     const changedQuestion = updatedQuestions.find(question => question.uniqueID === uniqueID);
     changedQuestion.votes = votes
     setQuestions(updatedQuestions);
   }
+
+  function handleVote(voteMessage) {
+    if (voteMessage.classCode === classCode) {
+      console.log('Vote received:', voteMessage);
+      fetchQuestions();
+    }
+  }
+
+  React.useEffect(() => {
+    voteNotifier.addHandler(handleVote);
+    return () => voteNotifier.removeHandler(handleVote);
+  });
 
   async function submitQuestion(e) {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -88,7 +102,11 @@ export function Questions({ activeUser, classCode }) {
         </div>
 
         {questions.sort((a, b) => b.votes - a.votes).map((question, index) => (
-          <Question key={question.uniqueID} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={(votes) => updateVote(question.uniqueID, votes)} />
+          <Question key={question.uniqueID} userName={question.userName} text={question.text} votes={question.votes} timePosted={question.timePosted} voteFunc={
+            (votes) => {
+              updateVote(question.uniqueID, votes)
+              voteNotifier.broadcastVote(activeUser, classCode, question.uniqueID, votes)}
+          } />
         ))}
       </div>
     </main>
